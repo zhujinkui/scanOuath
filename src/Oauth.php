@@ -11,36 +11,37 @@ namespace think;
 
 class Oauth
 {
-    var $appid = "wxb69d890d597e206a";
-    var $appsecret = "e55aef39acf9ad1f7415d83980b75e2f";
-
+    // var $app_id = "wxb69d890d597e206a";
+    // var $app_secret = "e55aef39acf9ad1f7415d83980b75e2f";
+    // var $app_id = "wxb2b4c1ac8ba09041";
+    // var $app_secret = "b1afa0d4af88feac2c36976e0d40cbaf";
     /**
      * [__construct 构造函数]
-     * @param [type] $appid     [appid]
-     * @param [type] $appsecret [appsecret]
+     * @param [type] $app_id     [app_id]
+     * @param [type] $app_secret [app_secret]
      */
-    public function __construct($appid = NULL, $appsecret = NULL)
+    public function __construct($app_id = NULL, $app_secret = NULL)
     {
-        if($appid && $appsecret){
-            $this->appid     = $appid;
-            $this->appsecret = $appsecret;
+        if($app_id && $app_secret){
+            $this->appid     = $app_id;
+            $this->appsecret = $app_secret;
         }
 
         //扫码登录不需要该Access Token, 语义理解需要
         //1. 本地写入
-        $res                = file_get_contents('access_token.json');
-        $result             = json_decode($res, true);
-        $this->expires_time = $result["expires_time"];
-        $this->access_token = $result["access_token"];
+        // $res                = file_get_contents('access_token.json');
+        // $result             = json_decode($res, true);
+        // $this->expires_time = $result["expires_time"];
+        // $this->access_token = $result["access_token"];
 
-        if (time() > ($this->expires_time + 3600)){
-            $url                = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=".$this->appid."&secret=".$this->appsecret;
-            $res                = $this->http_request($url);
-            $result             = json_decode($res, true);
-            $this->access_token = $result["access_token"];
-            $this->expires_time = time();
-            file_put_contents('access_token.json', '{"access_token": "'.$this->access_token.'", "expires_time": '.$this->expires_time.'}');
-        }
+        // if (time() > ($this->expires_time + 3600)){
+        //     $url                = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=".$this->appid."&secret=".$this->appsecret;
+        //     $res                = $this->http_request($url);
+        //     $result             = json_decode($res, true);
+        //     $this->access_token = $result["access_token"];
+        //     $this->expires_time = time();
+        //     file_put_contents('access_token.json', '{"access_token": "'.$this->access_token.'", "expires_time": '.$this->expires_time.'}');
+        // }
     }
 
     /**
